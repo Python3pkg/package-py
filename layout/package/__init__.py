@@ -14,10 +14,10 @@ from package.errors import *
 try:
     from setuptools import setup as real_setup
     has_setuptools = True
-except ImportError, err:
+except ImportError as err:
     try:
         from distutils.core import setup as real_setup
-    except ImportError, err:
+    except ImportError as err:
         die(ENOSETUP)
 
 class setup():
@@ -29,7 +29,7 @@ class setup():
     def get_args(self):
         try:
             import package.info
-        except ImportError, err:
+        except ImportError as err:
             die(ENOINFO)
 
         args = package.info.get()

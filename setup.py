@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-print """
+print("""
 Greetings!
 
 It looks like you are trying to install this package (called `package`). STOP!
@@ -28,5 +28,5 @@ Further instructions can be found at http://pypi.python.org/pypi/package/
 
 Enjoy!
 
-"""
+""")
 

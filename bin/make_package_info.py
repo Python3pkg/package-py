@@ -11,7 +11,7 @@ from package.errors import *
 
 try:
     import yaml
-except ImportError, err:
+except ImportError as err:
     die(ENOYAML)
 
 def get_config():
@@ -67,13 +67,13 @@ def check_config(config):
         module = config['version_from_module']
         del config['version_from_module']
         ns = {}
-        exec('import ' + module) in ns
+        exec(('import ' + module), ns)
         config['version'] = ns[module].__version__
 
     if 'description' not in config:
         module = config['name']
         ns = {}
-        exec('import ' + module) in ns
+        exec(('import ' + module), ns)
         desc = ns[module].__doc__
         m = re.match(r'\s*([^\.\!\n]*)', desc)
         if m:
@@ -111,7 +111,7 @@ def get():
 
     file = 'package/info.py'
     action = os.path.exists(file) and 'Updated' or 'Created'
-    print "%(action)s the '%(file)s' module for this package." % locals()
+    print("%(action)s the '%(file)s' module for this package." % locals())
     
     f = open(file, 'w')
     f.write(module)
@@ -119,7 +119,7 @@ def get():
 
 def update_template(config, file):
     if not os.path.exists(file):
-        print "Warning: %s does not exist." % file
+        print("Warning: %s does not exist." % file)
         return
     f = open(file, 'r')
     text = f.read()
@@ -128,12 +128,12 @@ def update_template(config, file):
         return
     try:
         text = text % config
-    except KeyError, err:
+    except KeyError as err:
         die(EBADINFO, err=err)
     f = open(file, 'w')
     f.write(text)
     f.close()
-    print "Updated '%s' with your info" % file
+    print("Updated '%s' with your info" % file)
 
 def add_failing_tests(config):
     file = "%s/__init__.py" % config['name']

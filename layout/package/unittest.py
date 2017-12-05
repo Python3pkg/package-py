@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 
@@ -17,7 +17,7 @@ class TestCase(unittest.TestCase):
             file('got', 'w').write(got)
             os.system('diff -u expected got')
 
-        self.assertEquals(got, expected, msg)
+        self.assertEqual(got, expected, msg)
 
 class main():
     def __init__(self, module='__main__', argv=None):
